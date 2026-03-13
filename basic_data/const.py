@@ -2,7 +2,9 @@ class const:
     sources = None
     domains = None
     excludeDomains = None
-    searchin = "title, description, content"
+    countries = None
+    
+    searchin = None
     COUNTRIES = {
         "ae",
         "ar",
@@ -59,7 +61,7 @@ class const:
         "ve",
         "za",
     }
-
+   
     language = {
         "ae": "ar",
         "ar": "es",
@@ -116,12 +118,14 @@ class const:
         "ve": "es",
         "za": "zu",
     }
-
+    
     LANGUAGES = {"ar", "de", "en", "es", "fr", "he", "it", "nl", "no", "pt", "ru", "sv", "ud", "zh"}
 
-    CATEGORIES = {"business", "entertainment", "general", "health", "science", "sports", "technology"}
+    category = {"business", "entertainment", "general", "health", "science", "sports", "technology"}
     SORT_METHOD = {"relevancy", "popularity", "publishedAt"}
     sortBY = {"publishedAt", "popularity", "relevancy"}
+    pageSize = 100
+    page = 1
 
 
     def set_country(country:str):

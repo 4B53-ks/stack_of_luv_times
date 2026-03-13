@@ -8,4 +8,4 @@ router = APIRouter(
 
 @router.post("/country/")
 def set_country(country):
-    return const.const.set_country(country)
+    return const.set_country(country)
