@@ -4,4 +4,6 @@ __pycache__/
 *.pyc
 **/docker-compose*
 **/compose.y*ml
-**/Dockerfile*
+**/Dockerfile
+
+**/googleoauth.apps.googleusercontent.com.json

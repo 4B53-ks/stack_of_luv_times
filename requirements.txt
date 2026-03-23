@@ -2,3 +2,9 @@ fastapi[standard]
 requests
 python-dotenv
 discord
+pymongo
+pyjwt
+bcrypt
+pydantic
+pydantic[email]
+cryptography
