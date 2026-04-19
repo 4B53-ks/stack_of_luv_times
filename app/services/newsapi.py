@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 import requests
-from basic_data import const, dataModel
+from basic_data import const
+from basic_data import dataModel
 import datetime as dt
 
 class NewsAPI:

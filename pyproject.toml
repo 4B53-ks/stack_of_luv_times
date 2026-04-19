@@ -1,2 +1,14 @@
-[tool.fastapi]
-entrypoint = "main:app"
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stack_of_luv_times"
+version = "0.1.0"
+description = "FastAPI application"
+dependencies = [
+  "fastapi[standard]",
+  "requests",
+  "python-dotenv",
+  "discord",
+]

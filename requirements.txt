@@ -2,3 +2,5 @@ fastapi[standard]
 requests
 python-dotenv
 discord
+jose
+pymongo

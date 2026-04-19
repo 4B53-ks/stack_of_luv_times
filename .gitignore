@@ -1,7 +1,9 @@
-.venv/
+venv/
 .env
 __pycache__/
 *.pyc
 **/docker-compose*
 **/compose.y*ml
 **/Dockerfile*
+.vscode/
+.fastapicloud/

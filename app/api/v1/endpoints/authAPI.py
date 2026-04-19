@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from auth.discordAuth import DiscordAuth
 import dotenv
 import os
+# from db import connection.client
 
 dotenv.load_dotenv()
 discord_auth = DiscordAuth(
@@ -31,3 +32,8 @@ def discord_login():
 def exchange_code_for_token(code: str=None):
     token_data = discord_auth.exchange_code_for_token(code)
     return {"token_data": token_data}
+
+@router.get("/discordUserInfo")
+def get_discord_user_info(access_token: str=None):
+    user_info = discord_auth.get_user_info(access_token)
+    return {"user_info": user_info}

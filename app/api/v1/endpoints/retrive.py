@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Header, HTTPException
-from retrive.newsapi import NewsAPI
+from services.newsapi import NewsAPI
 from typing import Annotated
 import datetime as dt
 import dotenv

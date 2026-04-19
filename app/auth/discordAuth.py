@@ -46,3 +46,32 @@ class DiscordAuth:
         else:
             print(f"Failed to exchange code: status {response.status_code}, response: {response.text}")
             raise Exception("Failed to exchange code for token")
+        
+    def refresh_token( self, access_tokenb):
+        pass
+        
+    def get_user_info(self, accessToken):
+        data = {}
+        headers = {
+            "Authorization": f"Bearer {accessToken}",
+        }
+        response = requests.get(
+            url='https://discord.com/api/v10/users/@me', 
+            data=data, 
+            headers=headers
+        )
+        
+        # db.add_many(all, fields, you, want)
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            if response.status_code == 401:
+                raise Exception(status_code =response.status_code, detail = "check for auth / headers")
+            if response.status_code == 400:
+                raise Exception(status_code =response.status_code, detail = "confirm URI")
+            print(response.status_code, response.text)
+            raise Exception(status_code =response.status_code, detail = "Failed to fetch the details")
+        
+    def generate_jwt():
+        pass
