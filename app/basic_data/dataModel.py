@@ -5,6 +5,8 @@ class newsResponse(BaseModel):
     
 class userData(BaseModel):
     userDiscordID: str
+    userAccessToke: str
+    userRefreshToken: str
     userGlobalName: str
     userAvatar:str
     Provider:str=None

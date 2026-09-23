@@ -17,7 +17,7 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
         "main:app",       # file_name:app_instance
-        host="0.0.0.0",
+        host="127.0.0.1",
         port=8000,
         reload=True       # auto reload on changes
     )

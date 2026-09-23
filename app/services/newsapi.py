@@ -16,8 +16,8 @@ class NewsAPI:
         params["sources"] = const.const.sources
         params["domains"] = const.const.domains
         params["excludeDomains"] = const.const.excludeDomains
-        params["pageSize"] = const.const.pageSize
-        params["page"] = const.const.page
+        params["pageSize"] = 1
+        params["page"] =1
         return params
 
     async def get_news(self, interests=None, from_param=None, to_param=None, language=None, sortby=None):
@@ -101,7 +101,7 @@ class NewsAPI:
                     detail=f"'country' must contain exactly 1 country code, got {len(country)}"
                 )        
         if country is not None:
-            if country not in const.const.COUNTRIES:
+            if country[0] not in const.const.COUNTRIES:
                 raise HTTPException(status_code=400, detail=f"Invalid country code: {country}")
             params["country"] = country
 

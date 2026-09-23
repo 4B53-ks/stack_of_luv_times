@@ -18,7 +18,7 @@ router = APIRouter(
     tags=["auth"]
 )
 
-@router.get("/redirect_auth")
+@router.post("/redirect_auth")
 def redirect_auth():
     # to read the incoming params
     return {"message": "Redirected back from Discord"}
@@ -28,8 +28,8 @@ def discord_login():
     auth_url = discord_auth.get_auth_url()
     return {"auth_url": auth_url}
 
-@router.get("/discordToken")
-def exchange_code_for_token(code: str=None):
+@router.post("/discordToken")
+def exchange_code_for_token(code: str):
     token_data = discord_auth.exchange_code_for_token(code)
     return {"token_data": token_data}
 
@@ -37,3 +37,8 @@ def exchange_code_for_token(code: str=None):
 def get_discord_user_info(access_token: str=None):
     user_info = discord_auth.get_user_info(access_token)
     return {"user_info": user_info}
+
+@router.post("/refresh_token")
+def get_refresh_token(refreshToken: str):
+    token_data = discord_auth.refresh_token(refreshToken)
+    return {"token_data": token_data}

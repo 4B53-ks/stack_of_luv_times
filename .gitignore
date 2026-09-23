@@ -7,3 +7,5 @@ __pycache__/
 **/Dockerfile*
 .vscode/
 .fastapicloud/
+solt.log
+extras

@@ -34,8 +34,8 @@ async def read_items(interests: Annotated[str, Header()],
 @router.get("/top-headlines/",
             description="Fetch top headlines with optional country and category filtering",
             summary="Fetch top headlines with optional country and category filtering")
-async def read_top_headlines(interests: Annotated[str, Header()] = None, 
-                             country: Annotated[str, Header()] = None, 
+async def read_top_headlines(interests: Annotated[str, Header()] , 
+                             country: Annotated[str, Header()] , 
                              category: Annotated[str, Header()] = None):
     
     interests_list = interests.strip().split(",") if interests else []

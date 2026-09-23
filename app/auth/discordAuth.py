@@ -10,6 +10,8 @@
 import discord
 import os
 import requests
+from db.dbWrite import db_write
+from basic_data.dataModel import userData
 
 
 class DiscordAuth:
@@ -35,20 +37,69 @@ class DiscordAuth:
             'grant_type': 'authorization_code',
             'code': code,
             'redirect_uri': self.redirectURI  # Must match the redirect URI used in the authorization step
-
         }
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-        response = requests.post('https://discord.com/api/oauth2/token', data=data, headers=headers, auth=(self.discordClientID, self.discordClientSecret))
+        response = requests.post('https://discord.com/api/v10/oauth2/token', data=data, headers=headers, auth=(self.discordClientID, self.discordClientSecret))
         if response.status_code == 200:
+            
+            # db data write
+            # {"token_data":
+            #     {"token_type":"Bearer",
+            #      "access_token":"MTQ4NDU0MTYzODAwODI0NjMwMg.Vr50Rt0WDvctqUz6ZScvelaJmM7Xwc",
+            #      "expires_in":604800,
+            #      "refresh_token":"TLkXxH6iHwHYXS21ijISwfVnhyvTqH",
+            #      "scope":"email identify connections guilds"
+            #      }
+            #     }
+            respJSON = response.json()
+            print(respJSON)
+            print(respJSON["access_token"])
+            
+            user_data__response = self.get_user_info(respJSON["access_token"])
+            print(user_data__response)
+            
             return response.json()
         else:
             print(f"Failed to exchange code: status {response.status_code}, response: {response.text}")
             raise Exception("Failed to exchange code for token")
         
-    def refresh_token( self, access_tokenb):
-        pass
+    def refresh_token(self, refresh_token):
+        if refresh_token is None:
+            raise ValueError("Refresh token is required")
+        data = {
+            'grant_type': 'refresh_token',
+            'refresh_token': refresh_token
+        }
+        headers = {
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+        response = requests.post(url='https://discord.com/api/v10/oauth2/token', data=data, headers=headers, auth=(self.discordClientID, self.discordClientSecret))
+        if 200 == response.status_code:
+            response.raise_for_status()
+            return response.json()
+        else:
+            print(f"Failed to exchange code: status {response.status_code}, response: {response.text}")
+            raise Exception("Failed to exchange code for token")
+        
+    def revoke_token( self, token):
+        if self.refresh_token is None:
+            raise ValueError("Authorization code is required")
+        data = {
+            'token': token,
+            'token_type_hint': 'access_token'
+        }
+        headers = {
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+        response = requests.post(url='https://discord.com/api/v10/oauth2/token/revoke', data=data, headers=headers, auth=(self.discordClientID, self.discordClientSecret))
+        if 200 == response.status_code:
+            response.raise_for_status()
+            return response.json()
+        else:
+            print(f"Failed to exchange code: status {response.status_code}, response: {response.text}")
+            raise Exception("Failed to exchange code for token")
         
     def get_user_info(self, accessToken):
         data = {}

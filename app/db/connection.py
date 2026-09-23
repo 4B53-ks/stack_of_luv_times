@@ -16,7 +16,8 @@ def check_active(active:str=None) -> bool:
     db_password = quote_plus(os.getenv("DB_PASSWORD"))
     db_user = os.getenv("DB_USERNAME")
     db_cluster = os.getenv("CLUSTER_NAME")
-    uri = f"mongodb+srv://{db_user}:{db_password}@{db_cluster}.mpxka4a.mongodb.net/?appName={db_cluster}"
+    # uri = f"mongodb://{db_user}:{db_password}@{db_cluster}.mpxka4a.mongodb.net/?appName={db_cluster}"
+    uri = f"mongodb+srv://24u1009:{db_password}@stack-of-luv-times.mpxka4a.mongodb.net/?appName=stack-of-luv-times"
 
     # Create a new client and connect to the server
     client = MongoClient(uri, server_api=ServerApi('1'))
@@ -37,3 +38,4 @@ def client_connect():
     uri = f"mongodb+srv://{db_user}:{db_password}@{db_cluster}.mpxka4a.mongodb.net/?appName={db_cluster}"
     client = MongoClient(uri, server_api=ServerApi('1'))
     return client
+
