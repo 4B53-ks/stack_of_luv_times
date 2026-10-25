@@ -4,3 +4,4 @@ python-dotenv
 discord
 PyJWT
 pymongo
+python-jose
